@@ -16,6 +16,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 const mongoose = require('mongoose')
+// mongoose.connect(config.mongoURI,{
 mongoose.connect(config.mongoURI,{
   useNewUrlParser: true,useUnifiedTopology:true,useCreateIndex:true,useFindAndModify:false
 }).then(() =>console.log('MongoDB Connected...'))
@@ -32,6 +33,7 @@ app.post('/register',(req,res) => {
     const user = new User(req.body)
 
     user.save((err, userInfo) =>{
+      console.log("req.body",req.body);
       if(err) return res.json({success: false,err})
       return res.status(200).json({
         success: true

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+
 const userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -31,9 +32,7 @@ const userSchema = mongoose.Schema({
     tokenExp: {
         type:Number
     }
-
 })
-
 
 userSchema.pre('save',function( next ){
     var user = this;
@@ -49,8 +48,12 @@ userSchema.pre('save',function( next ){
             })
         })
     }
+    else{
+        next();
+    }
 
 })
+  
 
 const User = mongoose.model('User',userSchema)
 
