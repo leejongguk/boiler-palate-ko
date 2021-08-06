@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { RegisterUser } from '../../../_actions/user_action';
+import { registerUser } from '../../../_actions/user_action';
 import Axios from 'axios';
 
 function RegisterPage(props) {
@@ -34,23 +34,20 @@ function RegisterPage(props) {
         if(Password !== ConfirmPassword){
             return alert('비밀번호가 일치하지 않습니다.')
         }
-        // console.log('email',Email)
-        // console.log('password',Password)
-
 
         let body={
-            email:Email,
-            name:Name,
-            password: Password
+            email: Email,
+            password: Password,
+            name: Name
         }
+
 
         dispatch(registerUser(body))
             .then(response =>{
-                if(response.payload.loginSuccess){
-                    props.history.push('/')
-
+                if(response.payload.success){
+                    props.history.push("/login")
                 }else {
-                    alert('Error')
+                    alert("Failed to sign up")
                 }
             })
 
@@ -77,7 +74,7 @@ function RegisterPage(props) {
                     <input type="Password" value={ConfirmPassword} onChange={onConfirmPasswordHandler} />
 
                     <br />
-                    <button>
+                    <button type="submit">
                         Sign Up
                     </button>
                 </form>

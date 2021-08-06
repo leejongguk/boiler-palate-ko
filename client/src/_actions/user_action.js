@@ -5,13 +5,11 @@ import {
 } from './types';
 
 export function loginUser(dataTosubmit){
-
-
     const request = Axios.post('/api/users/login',dataTosubmit)
         .then(response => response.data )
         
     return {
-        type: "LOGIN_USER",
+        type: LOGIN_USER,
         payload: request
     }
 }
@@ -24,7 +22,7 @@ export function registerUser(dataTosubmit){
         .then(response => response.data )
         
     return {
-        type: "REGISTER_USER",
+        type: REGISTER_USER,
         payload: request
     }
 }
